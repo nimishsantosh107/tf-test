@@ -16,6 +16,7 @@ const Dashboard = () => {
                         dropdownValues={dummydata["1_suggestedTokens"] || []}
                         wClassname="w-96"
                         hClassname="max-h-72"
+                        icon="search"
                     />
                 </div>
             </div>

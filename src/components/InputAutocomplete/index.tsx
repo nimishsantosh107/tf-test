@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SearchIcon, DownIcon } from "./icons";
 
 type TInputAutocompleteProps = {
     inputPlaceholder: string;
@@ -7,6 +8,7 @@ type TInputAutocompleteProps = {
     dropdownValues: string[];
     wClassname: string;
     hClassname: string;
+    icon?: "search" | "down";
 };
 
 const InputAutocomplete = ({
@@ -16,6 +18,7 @@ const InputAutocomplete = ({
     dropdownValues,
     wClassname,
     hClassname,
+    icon,
 }: TInputAutocompleteProps) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [filteredDropdownValues, setFilteredDropdownValues] = useState(dropdownValues);
@@ -37,19 +40,28 @@ const InputAutocomplete = ({
         }
     };
 
+    const renderIcon = () => {
+        if (!icon) return <></>;
+        else return icon === "search" ? <SearchIcon /> : <DownIcon />;
+    };
+
     return (
         <div className="flex flex-col ">
-            <input
-                type="text"
-                placeholder={inputPlaceholder}
-                value={inputValue}
-                onChange={handleInputChange}
-                onFocus={() => {
-                    if (filteredDropdownValues.length > 0) setDropdownVisible(true);
-                }}
-                onBlur={() => setTimeout(() => setDropdownVisible(false), 100)}
-                className={`input input-bordered ${wClassname}`}
-            />
+            <div className="w-full relative">
+                <input
+                    type="text"
+                    placeholder={inputPlaceholder}
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onFocus={() => {
+                        if (filteredDropdownValues.length > 0) setDropdownVisible(true);
+                    }}
+                    onBlur={() => setTimeout(() => setDropdownVisible(false), 100)}
+                    className={`input input-bordered ${wClassname}`}
+                />
+                {renderIcon()}
+            </div>
+
             <div className={`mt-1 dropdown ${dropdownVisible ? "dropdown-open" : "dropdown-close"}`}>
                 <ul
                     tabIndex={0}
