@@ -20,7 +20,7 @@ const DashboardStats = ({
 }: TDashboardStatsProps) => {
     return (
         <>
-            <div className="lg:h-72 w-full stats stats-vertical shadow">
+            <div className="bg-base-200 lg:h-72 w-full stats stats-vertical shadow">
                 <div className="stat">
                     <div className="stat-title">
                         <div className="flex gap-2 items-center">

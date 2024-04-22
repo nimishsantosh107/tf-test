@@ -41,7 +41,7 @@ const Dashboard = () => {
                         />
                     </div>
                     <div className=" w-full flex flex-col lg:flex-row lg:justify-between gap-4 mt-4">
-                        <div>
+                        <div className="border border-slate-700 rounded-lg">
                             <DashboardStats
                                 tokenName="Ethereum"
                                 tokenSymbol="ETH"
@@ -52,7 +52,7 @@ const Dashboard = () => {
                             />
                         </div>
 
-                        <div className="w-full lg:max-w-96 h-72 border border-slate-700 rounded-lg">
+                        <div className="w-full lg:max-w-96 h-72 bg-base-200 border border-slate-700 rounded-lg">
                             <LineChart token24HrChange={-1.343} data={dummydata["2_chartData"]} />
                         </div>
                     </div>

@@ -73,7 +73,7 @@ const DashboardTable = ({ tokenVsCurrency, data }: TDashboardTableProps) => {
     return (
         <>
             <div className="overflow-x-auto">
-                <table className="table">
+                <table className="table bg-base-200 border-base-300">
                     <tbody>{constructTable()}</tbody>
                 </table>
             </div>
