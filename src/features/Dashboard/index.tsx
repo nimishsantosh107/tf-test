@@ -11,7 +11,6 @@ const Dashboard = () => {
     const { width } = useWindowDimensions();
 
     const [isClient, setIsClient] = useState(false);
-
     const [tokenInput, setTokenInput] = useState(dummydata["1_suggestedTokens"][0]);
     const [vsCurrencyInput, setVsCurrencyInput] = useState(dummydata["1_suggestedTokens"][0]);
 
@@ -19,7 +18,7 @@ const Dashboard = () => {
 
     return isClient ? (
         <>
-            <div className="card bg-base-300 shadow-2xl p-10 mx-10">
+            <div className="card bg-base-300 shadow-2xl p-6 lg:p-10 mx-10">
                 <div className="w-fit lg:min-w-[720px] flex flex-col justify-center">
                     <div className="flex gap-4 justify-center w-full">
                         <InputAutocomplete
