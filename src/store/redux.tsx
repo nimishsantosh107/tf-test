@@ -6,14 +6,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { exampleSlice } from "./slices";
 
 /* QUERIES */
-import { exampleApi } from "./queries";
+import { coingeckoApi } from "./queries";
 
 const store = configureStore({
     reducer: {
         [exampleSlice.reducerPath]: exampleSlice.reducer,
-        [exampleApi.reducerPath]: exampleApi.reducer,
+        [coingeckoApi.reducerPath]: coingeckoApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(exampleApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(coingeckoApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

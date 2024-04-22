@@ -1,1 +1,1 @@
-export * from "./exampleApiHook";
+export * from "./coingeckoApiHook";
