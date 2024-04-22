@@ -66,7 +66,7 @@ const InputAutocomplete = ({
             <div className={`mt-1 dropdown ${dropdownVisible ? "dropdown-open" : "dropdown-close"}`}>
                 <ul
                     tabIndex={0}
-                    className={`dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box ${wClassname} ${hClassname} overflow-y-auto block`}
+                    className={`dropdown-content z-[10] menu p-2 shadow bg-base-200 rounded-box ${wClassname} ${hClassname} overflow-y-auto block`}
                 >
                     {filteredDropdownValues.map((item) => (
                         <li key={item}>
