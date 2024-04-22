@@ -8,7 +8,7 @@ type TInputAutocompleteProps = {
     dropdownValues: string[];
     wClassname: string;
     hClassname: string;
-    icon?: "search" | "down";
+    icon?: "search" | "down" | "none";
 };
 
 const InputAutocomplete = ({
@@ -41,8 +41,9 @@ const InputAutocomplete = ({
     };
 
     const renderIcon = () => {
-        if (!icon) return <></>;
-        else return icon === "search" ? <SearchIcon /> : <DownIcon />;
+        if (!icon || icon === "none") return <></>;
+        else if (icon === "search") return <SearchIcon />;
+        else if (icon === "down") return <DownIcon />;
     };
 
     return (

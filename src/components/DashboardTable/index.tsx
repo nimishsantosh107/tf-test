@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useWindowDimensions from "@/hooks/window";
 
 type TDashboardTableProps = {
@@ -15,11 +15,6 @@ type TDashboardTableProps = {
 
 const DashboardTable = ({ tokenVsCurrency, data }: TDashboardTableProps) => {
     const { width } = useWindowDimensions();
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
 
     type ColumnKey =
         | "MARKET_CAP"
@@ -77,17 +72,11 @@ const DashboardTable = ({ tokenVsCurrency, data }: TDashboardTableProps) => {
 
     return (
         <>
-            {isClient ? (
-                <>
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            <tbody>{constructTable()}</tbody>
-                        </table>
-                    </div>
-                </>
-            ) : (
-                <></>
-            )}
+            <div className="overflow-x-auto">
+                <table className="table">
+                    <tbody>{constructTable()}</tbody>
+                </table>
+            </div>
         </>
     );
 };
