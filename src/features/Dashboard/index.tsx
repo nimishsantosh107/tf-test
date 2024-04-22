@@ -48,12 +48,12 @@ const Dashboard = () => {
                                 tokenLogo="https://assets.coingecko.com/coins/images/11939/large/shiba.png?1696511800"
                                 tokenVsCurrency="USD"
                                 tokenPrice={52423.43}
-                                token24HrChange={1.343}
+                                token24HrChange={-1.343}
                             />
                         </div>
 
                         <div className="w-full lg:max-w-96 h-72 border border-slate-700 rounded-lg">
-                            <LineChart data={dummydata["2_chartData"]} />
+                            <LineChart token24HrChange={-1.343} data={dummydata["2_chartData"]} />
                         </div>
                     </div>
                     <div className="border border-slate-700 rounded-lg mt-6">

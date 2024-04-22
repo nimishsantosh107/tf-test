@@ -1,5 +1,6 @@
 export type TChartProps = {
     data: { time: string; value: number }[];
+    token24HrChange: number;
     className?: string;
 };
 
@@ -59,9 +60,18 @@ export const chartOptions = {
 };
 
 export const seriesOptions = {
-    topColor: "rgba(37, 99, 235, 0.4)",
-    bottomColor: "rgba(37, 99, 235, 0)",
-    lineColor: "rgba(37, 99, 235, 1)",
-    lineStyle: 0,
-    lineWidth: 2,
+    INC: {
+        topColor: "rgba(45, 212, 191, 1)",
+        bottomColor: "rgba(37, 99, 235, 0)",
+        lineColor: "rgba(54, 255, 229, 1)",
+        lineStyle: 0,
+        lineWidth: 3,
+    },
+    DEC: {
+        topColor: "rgba(255, 76, 110, 1)",
+        bottomColor: "rgba(37, 99, 235, 0)",
+        lineColor: "rgba(251, 112, 133, 1)",
+        lineStyle: 0,
+        lineWidth: 3,
+    },
 };
