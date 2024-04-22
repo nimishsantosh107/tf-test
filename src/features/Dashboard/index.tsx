@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import InputAutocomplete from "@/components/InputAutocomplete";
 import LineChart from "@/components/LineChart";
 import DashboardStats from "@/components/DashboardStats";
+import DashboardTable from "@/components/DashboardTable";
+
 import dummydata from "../../dummydata.json";
 
 const Dashboard = () => {
-    const [tokenInput, setTokenInput] = useState("");
+    const [tokenInput, setTokenInput] = useState(dummydata["1_suggestedTokens"][0]);
     const [vsCurrencyInput, setVsCurrencyInput] = useState(dummydata["1_suggestedTokens"][0]);
 
     return (
@@ -32,7 +34,7 @@ const Dashboard = () => {
                     />
                 </div>
                 <div className=" w-full flex flex-col lg:flex-row gap-4 mt-4">
-                    <div>
+                    <div className="h-full">
                         <DashboardStats
                             tokenName="Ethereum"
                             tokenSymbol="ETH"
@@ -48,32 +50,17 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="border border-slate-700 rounded-lg mt-6">
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            <tbody>
-                                <tr>
-                                    <th>Market Cap</th>
-                                    <td>1,301,715,164,290 USD</td>
-                                </tr>
-                                <tr>
-                                    <th>Total Volume</th>
-                                    <td>1,301,715,164,290 USD</td>
-                                </tr>
-                                {/* <tr>
-                                    <th>Total Supply</th>
-                                    <td>1,301,715,164,290 USD</td>
-                                    <th>Max Supply</th>
-                                    <td>1,301,715,164,290 USD</td>
-                                </tr>
-                                <tr>
-                                    <th>24h High</th>
-                                    <td>1,301,715,164,290 USD</td>
-                                    <th>24h Low</th>
-                                    <td>1,301,715,164,290 USD</td>
-                                </tr> */}
-                            </tbody>
-                        </table>
-                    </div>
+                    <DashboardTable
+                        tokenVsCurrency="USD"
+                        data={{
+                            MARKET_CAP: 1233121231212,
+                            TOTAL_VOLUME: 122312,
+                            TOTAL_SUPPLY: 1233121231212,
+                            MAX_SUPPLY: 1233121231212,
+                            HIGH_24: 1233121231212,
+                            LOW_24: 1233121231212,
+                        }}
+                    />
                 </div>
             </div>
         </div>
