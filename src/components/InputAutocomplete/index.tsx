@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SearchIcon, DownIcon } from "./icons";
+import { SearchIcon, DownIcon } from "../utils/icons";
 
 type TInputAutocompleteProps = {
     inputPlaceholder: string;
@@ -46,7 +46,7 @@ const InputAutocomplete = ({
     };
 
     return (
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
             <div className="w-full relative">
                 <input
                     type="text"
@@ -65,7 +65,7 @@ const InputAutocomplete = ({
             <div className={`mt-1 dropdown ${dropdownVisible ? "dropdown-open" : "dropdown-close"}`}>
                 <ul
                     tabIndex={0}
-                    className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box ${wClassname} ${hClassname} overflow-y-auto block`}
+                    className={`dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box ${wClassname} ${hClassname} overflow-y-auto block`}
                 >
                     {filteredDropdownValues.map((item) => (
                         <li key={item}>
