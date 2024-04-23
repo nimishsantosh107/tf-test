@@ -1,3 +1,5 @@
-export const addDelimiter = (item: string) => item + "##";
+export const LS_DELIMITER = "##";
 
-export const sanitizeDelimiter = (item: string) => item.replace("##", "");
+export const addDelimiter = (item: string) => item + LS_DELIMITER;
+
+export const sanitizeDelimiter = (item: string) => item.replace(LS_DELIMITER, "");

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SearchIcon, DownIcon } from "../utils/icons";
+import { SearchIcon, DownIcon, HistoryIcon } from "../utils/icons";
+import { LS_DELIMITER, sanitizeDelimiter } from "@/utils";
 
 type TInputAutocompleteProps = {
     inputPlaceholder: string;
@@ -72,13 +73,31 @@ const InputAutocomplete = ({
                     tabIndex={0}
                     className={`dropdown-content z-[10] menu p-2 shadow bg-base-200 rounded-box ${wClassname} ${hClassname} overflow-y-auto block`}
                 >
-                    {filteredDropdownValues.map((item) => (
-                        <li key={item}>
-                            <button onClick={() => inputSetvalue(item.toUpperCase())}>
-                                {item.toUpperCase()}
-                            </button>
-                        </li>
-                    ))}
+                    {filteredDropdownValues.map((item) => {
+                        if (item.includes(LS_DELIMITER)) {
+                            return (
+                                <li key={item}>
+                                    <button
+                                        className="flex justify-between items-center"
+                                        onClick={() => inputSetvalue(item.toUpperCase())}
+                                    >
+                                        <span> {sanitizeDelimiter(item).toUpperCase()} </span>
+                                        <div>
+                                            <HistoryIcon />
+                                        </div>
+                                    </button>
+                                </li>
+                            );
+                        } else {
+                            return (
+                                <li key={item}>
+                                    <button onClick={() => inputSetvalue(item.toUpperCase())}>
+                                        {item.toUpperCase()}
+                                    </button>
+                                </li>
+                            );
+                        }
+                    })}
                 </ul>
             </div>
         </div>
