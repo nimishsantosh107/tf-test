@@ -45,6 +45,7 @@ const DashboardStats = ({
                             <>{token24HrChange > 0 ? <TrendUpIcon /> : <TrendDownIcon />}</>
                         </div>
                     </div>
+                    <div className="stat-desc">24 hour change: {token24HrChange}%</div>
                 </div>
             </div>
         </>
