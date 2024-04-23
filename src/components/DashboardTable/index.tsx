@@ -7,7 +7,7 @@ type TDashboardTableProps = {
         MARKET_CAP: number;
         TOTAL_VOLUME: number;
         TOTAL_SUPPLY: number;
-        MAX_SUPPLY: number;
+        MARKET_CAP_RANK: number;
         HIGH_24: number;
         LOW_24: number;
     };
@@ -20,20 +20,20 @@ const DashboardTable = ({ tokenVsCurrency, data }: TDashboardTableProps) => {
         | "MARKET_CAP"
         | "TOTAL_VOLUME"
         | "TOTAL_SUPPLY"
-        | "MAX_SUPPLY"
+        | "MARKET_CAP_RANK"
         | "HIGH_24"
         | "LOW_24";
     const columns: { key: ColumnKey; name: string; includeVsCurrency?: boolean }[] = [
         { key: "MARKET_CAP", name: "Market Cap", includeVsCurrency: true },
         { key: "TOTAL_VOLUME", name: "Total Volume", includeVsCurrency: true },
         { key: "TOTAL_SUPPLY", name: "Total Supply" },
-        { key: "MAX_SUPPLY", name: "Max Supply" },
+        { key: "MARKET_CAP_RANK", name: "Market Cap Rank" },
         { key: "HIGH_24", name: "24h High", includeVsCurrency: true },
         { key: "LOW_24", name: "24h Low", includeVsCurrency: true },
     ];
 
     const createCell = (key: string, value: string, key2?: string, value2?: string) => (
-        <tr>
+        <tr key={key}>
             <th>{key}</th>
             <td>{value}</td>
             {key2 && <th>{key2}</th>}

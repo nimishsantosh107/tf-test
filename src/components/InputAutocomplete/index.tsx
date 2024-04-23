@@ -70,7 +70,9 @@ const InputAutocomplete = ({
                 >
                     {filteredDropdownValues.map((item) => (
                         <li key={item}>
-                            <button onClick={() => inputSetvalue(item)}>{item}</button>
+                            <button onClick={() => inputSetvalue(item.toUpperCase())}>
+                                {item.toUpperCase()}
+                            </button>
                         </li>
                     ))}
                 </ul>
