@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import InputAutocomplete from "@/components/InputAutocomplete";
 import LineChart from "@/components/LineChart";
 import DashboardStats from "@/components/DashboardStats";
@@ -10,15 +10,18 @@ import {
     useLazyGetMarketByIdQuery,
     useLazyGetMarketChatDataByIdQuery,
 } from "@/hooks/queries";
+import { SpinnerContext } from "@/contexts";
 import defaultConfig from "@/config";
 
 const Dashboard = () => {
     const { width } = useWindowDimensions();
+    const { setSpinnerVisible } = useContext(SpinnerContext);
 
     const [tokenInput, setTokenInput] = useState(defaultConfig.DEFAULT_TOKEN);
     const [vsCurrencyInput, setVsCurrencyInput] = useState(defaultConfig.DEFAULT_VS_CURRENCY);
     const [activeVsCurrency, setActiveVsCurrency] = useState(defaultConfig.DEFAULT_VS_CURRENCY);
 
+    // QUERIES
     const {
         data: currencyData,
         isSuccess: isCurrencyDataSuccess,
@@ -42,6 +45,7 @@ const Dashboard = () => {
             data: oneMarketData,
             isSuccess: isOneMarketDataSuccess,
             isLoading: isOneMarketDataLoading,
+            isFetching: isOneMarketDataFetching,
             isError: isOneMarketDataError,
         },
     ] = useLazyGetMarketByIdQuery();
@@ -52,16 +56,12 @@ const Dashboard = () => {
             data: marketChartData,
             isSuccess: isMarketChartDataSuccess,
             isLoading: isMarketChartDataLoading,
+            isFetching: isMarketChartDataFetching,
             isError: isMarketChartDataError,
         },
     ] = useLazyGetMarketChatDataByIdQuery();
 
-    const handleSearchClick = async () => {
-        triggerOne({ id: tokenInput, vsCurrency: vsCurrencyInput }, true);
-        triggerChart({ id: tokenInput, vsCurrency: vsCurrencyInput, days: 10 }, true);
-        setActiveVsCurrency(vsCurrencyInput);
-    };
-
+    // USE EFFECTS
     useEffect(() => {
         triggerAll({ vsCurrency: defaultConfig.DEFAULT_VS_CURRENCY }, true);
         triggerOne(
@@ -73,6 +73,25 @@ const Dashboard = () => {
             true
         );
     }, []);
+
+    useEffect(() => {
+        if (isOneMarketDataFetching || isMarketChartDataFetching) {
+            setSpinnerVisible(true);
+        }
+    }, [isOneMarketDataFetching, isMarketChartDataFetching]);
+
+    useEffect(() => {
+        if (oneMarketData && marketChartData) {
+            setActiveVsCurrency(vsCurrencyInput);
+            setSpinnerVisible(false);
+        }
+    }, [oneMarketData, marketChartData]);
+
+    // ACTIONS
+    const handleSearchClick = async () => {
+        triggerOne({ id: tokenInput, vsCurrency: vsCurrencyInput }, true);
+        triggerChart({ id: tokenInput, vsCurrency: vsCurrencyInput, days: 10 }, true);
+    };
 
     return isCurrencyDataSuccess &&
         isAllMarketDataSuccess &&
