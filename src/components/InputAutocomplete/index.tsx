@@ -79,7 +79,9 @@ const InputAutocomplete = ({
                                 <li key={item}>
                                     <button
                                         className="flex justify-between items-center"
-                                        onClick={() => inputSetvalue(item.toUpperCase())}
+                                        onClick={() =>
+                                            inputSetvalue(sanitizeDelimiter(item).toUpperCase())
+                                        }
                                     >
                                         <span> {sanitizeDelimiter(item).toUpperCase()} </span>
                                         <div>
