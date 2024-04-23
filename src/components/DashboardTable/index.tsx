@@ -4,9 +4,9 @@ import useWindowDimensions from "@/hooks/window";
 type TDashboardTableProps = {
     tokenVsCurrency: string;
     data: {
-        MARKET_CAP: number;
-        TOTAL_VOLUME: number;
-        TOTAL_SUPPLY: number;
+        MARKET_CAP: string;
+        TOTAL_VOLUME: string;
+        TOTAL_SUPPLY: string;
         MARKET_CAP_RANK: number;
         HIGH_24: number;
         LOW_24: number;

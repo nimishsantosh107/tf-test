@@ -128,9 +128,9 @@ const Dashboard = () => {
                         <DashboardTable
                             tokenVsCurrency={activeVsCurrency}
                             data={{
-                                MARKET_CAP: oneMarketData?.market_cap || 0,
-                                TOTAL_VOLUME: oneMarketData?.total_volume || 0,
-                                TOTAL_SUPPLY: Number(oneMarketData?.total_supply.toFixed(2)) || 0,
+                                MARKET_CAP: oneMarketData?.market_cap.toLocaleString("en-US") || "",
+                                TOTAL_VOLUME: oneMarketData?.total_volume.toLocaleString("en-US") || "",
+                                TOTAL_SUPPLY: oneMarketData?.total_supply.toFixed(2) || "",
                                 MARKET_CAP_RANK: oneMarketData?.market_cap_rank || 0,
                                 HIGH_24: oneMarketData?.high_24h || 0,
                                 LOW_24: oneMarketData?.low_24h || 0,
