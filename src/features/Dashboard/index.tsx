@@ -104,9 +104,14 @@ const Dashboard = () => {
     // ACTIONS
     const handleSearchClick = async () => {
         const sanitizedTokenInput = sanitizeDelimiter(tokenInput);
-        triggerOne({ id: sanitizedTokenInput, vsCurrency: vsCurrencyInput }, true);
-        triggerChart({ id: sanitizedTokenInput, vsCurrency: vsCurrencyInput, days: 10 }, true);
-        if (!getLSTokenData().includes(sanitizedTokenInput.toUpperCase())) appendLSTokenData(tokenInput);
+        if (!tokenList.includes(sanitizedTokenInput)) alert("Invalid Token ID");
+        else if (!currencyData?.includes(vsCurrencyInput)) alert("Invalid Currency");
+        else {
+            triggerOne({ id: sanitizedTokenInput, vsCurrency: vsCurrencyInput }, true);
+            triggerChart({ id: sanitizedTokenInput, vsCurrency: vsCurrencyInput, days: 10 }, true);
+            if (!getLSTokenData().includes(sanitizedTokenInput.toUpperCase()))
+                appendLSTokenData(tokenInput);
+        }
     };
 
     return isCurrencyDataSuccess &&
