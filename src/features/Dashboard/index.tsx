@@ -81,14 +81,15 @@ const Dashboard = () => {
         <>
             <div className="w-full lg:w-fit card bg-base-300 shadow-2xl p-6 lg:p-10 mx-2">
                 <div className="w-full lg:min-w-[720px] flex flex-col justify-center">
-                    <div className="w-full flex gap-4 justify-center">
+                    <div className="w-full flex gap-2 lg:gap-4 justify-center">
                         <InputAutocomplete
                             inputPlaceholder="Ticker Symbol"
                             inputValue={tokenInput}
                             inputSetvalue={setTokenInput}
                             dropdownValues={allMarketData?.map((item) => item.id) || []}
-                            wClassname="w-full max-w-96 lg:w-96"
+                            wClassname="w-full"
                             hClassname="max-h-72"
+                            divClassOverride="w-full"
                             icon={`${width > 1024 ? "search" : "none"}`}
                         />
                         <InputAutocomplete

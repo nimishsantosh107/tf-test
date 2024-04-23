@@ -8,6 +8,7 @@ type TInputAutocompleteProps = {
     dropdownValues: string[];
     wClassname: string;
     hClassname: string;
+    divClassOverride?: string;
     icon?: "search" | "down" | "none";
 };
 
@@ -18,6 +19,7 @@ const InputAutocomplete = ({
     dropdownValues,
     wClassname,
     hClassname,
+    divClassOverride = "",
     icon,
 }: TInputAutocompleteProps) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -47,7 +49,7 @@ const InputAutocomplete = ({
     };
 
     return (
-        <div className="flex flex-col">
+        <div className={`${divClassOverride} flex flex-col`}>
             <div className="w-full relative">
                 <input
                     type="text"
