@@ -37,11 +37,13 @@ export const coingeckoApi = createApi({
                 url: `/coins/market_chart?id=${id.toLowerCase()}&vs_currency=${vsCurrency.toLowerCase()}&days=${days}`,
                 method: "GET",
             }),
-            transformResponse: (responseData: CoingeckoMarketChartData) =>
-                responseData.prices.map((item) => ({
-                    time: new Date(item[0]).toJSON(),
-                    value: item[1],
-                })),
+            transformResponse: (responseData: CoingeckoMarketChartData, meta, args) =>
+                responseData.prices
+                    .filter((item, index) => index != args.days - 1)
+                    .map((item) => ({
+                        time: new Date(item[0]).toJSON(),
+                        value: item[1],
+                    })),
         }),
     }),
 });

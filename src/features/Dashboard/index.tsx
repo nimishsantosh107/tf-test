@@ -120,7 +120,7 @@ const Dashboard = () => {
                         <div className="w-full lg:w-1/2 h-72 bg-base-200 border border-slate-700 rounded-lg">
                             <LineChart
                                 token24HrChange={oneMarketData?.price_change_percentage_24h || 0}
-                                data={[]}
+                                data={marketChartData || []}
                             />
                         </div>
                     </div>
