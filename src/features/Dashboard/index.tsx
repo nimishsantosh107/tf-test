@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import _ from "lodash";
 import InputAutocomplete from "@/components/InputAutocomplete";
 import LineChart from "@/components/LineChart";
 import DashboardStats from "@/components/DashboardStats";
@@ -11,6 +12,8 @@ import {
     useLazyGetMarketChatDataByIdQuery,
 } from "@/hooks/queries";
 import { SpinnerContext } from "@/contexts";
+import { getLSTokenData, appendLSTokenData } from "@/services";
+import { addDelimiter, sanitizeDelimiter } from "@/utils";
 import defaultConfig from "@/config";
 
 const Dashboard = () => {
@@ -20,6 +23,7 @@ const Dashboard = () => {
     const [tokenInput, setTokenInput] = useState(defaultConfig.DEFAULT_TOKEN);
     const [vsCurrencyInput, setVsCurrencyInput] = useState(defaultConfig.DEFAULT_VS_CURRENCY);
     const [activeVsCurrency, setActiveVsCurrency] = useState(defaultConfig.DEFAULT_VS_CURRENCY);
+    const [tokenList, setTokenList] = useState<string[]>([]);
 
     // QUERIES
     const {
@@ -75,6 +79,16 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
+        if (allMarketData) {
+            const tokenIds = allMarketData.map((item) => item.id.toUpperCase());
+            const cacheTokenIds = getLSTokenData();
+            const filteredTokenIds = _.difference(tokenIds, cacheTokenIds);
+            const _cacheTokenIds = cacheTokenIds.map((item) => addDelimiter(item));
+            setTokenList(_cacheTokenIds.concat(filteredTokenIds));
+        }
+    }, [allMarketData, oneMarketData]);
+
+    useEffect(() => {
         if (isOneMarketDataFetching || isMarketChartDataFetching) {
             setSpinnerVisible(true);
         }
@@ -89,8 +103,10 @@ const Dashboard = () => {
 
     // ACTIONS
     const handleSearchClick = async () => {
-        triggerOne({ id: tokenInput, vsCurrency: vsCurrencyInput }, true);
-        triggerChart({ id: tokenInput, vsCurrency: vsCurrencyInput, days: 10 }, true);
+        const sanitizedTokenInput = sanitizeDelimiter(tokenInput);
+        triggerOne({ id: sanitizedTokenInput, vsCurrency: vsCurrencyInput }, true);
+        triggerChart({ id: sanitizedTokenInput, vsCurrency: vsCurrencyInput, days: 10 }, true);
+        if (!getLSTokenData().includes(sanitizedTokenInput.toUpperCase())) appendLSTokenData(tokenInput);
     };
 
     return isCurrencyDataSuccess &&
@@ -105,7 +121,7 @@ const Dashboard = () => {
                             inputPlaceholder="Ticker Symbol"
                             inputValue={tokenInput}
                             inputSetvalue={setTokenInput}
-                            dropdownValues={allMarketData?.map((item) => item.id) || []}
+                            dropdownValues={tokenList}
                             wClassname="w-full"
                             hClassname="max-h-72"
                             divClassOverride="w-full"

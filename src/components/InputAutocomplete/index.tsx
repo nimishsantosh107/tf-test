@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchIcon, DownIcon } from "../utils/icons";
 
 type TInputAutocompleteProps = {
@@ -47,6 +47,8 @@ const InputAutocomplete = ({
         else if (icon === "search") return <SearchIcon />;
         else if (icon === "down") return <DownIcon />;
     };
+
+    useEffect(() => setFilteredDropdownValues(dropdownValues), [dropdownValues]);
 
     return (
         <div className={`${divClassOverride} flex flex-col`}>
